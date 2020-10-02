@@ -22,82 +22,82 @@ class Employee
         this.salary=salary;
         this.post=post;
         this.profit=profit;
-
+        
     }
     //methods of parent class
-    public void printDetails(Employee e)
+    public void printDetails()
     {
-        System.out.println("Id-"+e.id);
-        System.out.println("Name-"+e.name);
-        System.out.println("Age-"+e.age);
-        System.out.println("Department-"+e.department);
-        System.out.println("Salary-"+e.salary);
-        System.out.println("Post-"+e.post);
-
+        System.out.println("Id-"+this.id);
+        System.out.println("Name-"+this.name);
+        System.out.println("Age-"+this.age);
+        System.out.println("Department-"+this.department);
+        System.out.println("Salary-"+this.salary);
+        System.out.println("Post-"+this.post);
+        
     }
-    public int getId(Employee e)
+    public int getId()
     {
-        return(e.id);
+        return(this.id);
     }
-    public String getName(Employee e)
+    public String getName()
     {
-        return(e.name);
+        return(this.name);
     }
-    public int calSalary(Employee e)
+    public int calSalary()
     {
-        int x=(e.profit/100)*e.salary;
-        int y=x+e.salary;
+        int x=(this.profit/100)*this.salary;
+        int y=x+this.salary;
         y=y*12;
         return y;
     }
-    public void printAnnualsalary(Employee e)
+    public void printAnnualsalary()
     {
-        int x=calSalary(e);
+        int x=calSalary();
         System.out.println("Annual Salary-"+x);
     }
-    public void setUnders(Employee e1)
+    public void setUnders()
     {
-        e1.unders.add(null);
+        this.unders.add(null);
     }
-    public void setUnders(Employee e1,Employee e2)
+    public void setUnders(Employee e2)
     {
-        e1.unders.add(e2);
-        setUpper(e2,e1);
+        this.unders.add(e2);
+         this.setUpper(e2);
     }
-    public void setUnders(Employee e1,Employee e2,Employee e3)
+    public void setUnders(Employee e2,Employee e3)
     {
-        e1.unders.add(e2);
-        setUpper(e2,e1);
-        e1.unders.add(e3);
-        setUpper(e3,e1);
+        this.unders.add(e2);
+       this.setUpper(e2);
+        this.unders.add(e3);
+        this.setUpper(e3);
     }
-    public void printUnders(Employee e)
+    public void printUnders()
     {
-     if(e.unders.get(0)==null)
+     if(this.unders.get(0)==null)
         {
             System.out.println("Juniors-No juniors found");
         }
         else
         {
             System.out.print("Juniors-");
-            for(int i=0;i<e.unders.size();i++)
+            for(int i=0;i<this.unders.size();i++)
             {
-                 Employee x=e.unders.get(i);
+                 Employee x=this.unders.get(i);
                 System.out.print(x.name+" ");
             }
         }
     }
-    public Vector<Employee> getUnders(Employee e)
+    public Vector<Employee> getUnders()
     {
-        return(e.unders);
+        return(this.unders);
     }
-    public void setUpper(Employee e1,Employee e2)
+    public void setUpper(Employee e2)
     {
-        e1.upper=e2;
+        e2.upper=this;
     }
-    public void printUpper(Employee e)
+    public void printUpper()
     {
-        Employee x=e.upper;
+        Employee x=this.upper;
         if(x==null)
         {
             System.out.println("Superior:No Superior found");
@@ -106,11 +106,11 @@ class Employee
         {
             System.out.println("Superior-"+x.name);
         }
-
+        
     }
-    public Employee getUpper(Employee e)
+    public Employee getUpper()
     {
-        return(e.upper);
+        return(this.upper);
     }
     public void printHierarchy()
     {
@@ -122,7 +122,7 @@ class Employee
         for(int i=0;i<x;i++)
         {
              Employee e=this.unders.get(i);
-            System.out.print(e.getName(e)+" ");
+            System.out.print(e.getName()+" ");
         }
         System.out.println("");
     }
@@ -140,7 +140,7 @@ class Employee
             e.getHierarchy();
         }
     }
-
+    
 }
 class Tier1 extends Employee                    // HODs,Executives
 {    
@@ -149,12 +149,12 @@ class Tier1 extends Employee                    // HODs,Executives
     {
        super(id,name,age,department,salary,post,profit);
      }
-    public void setRating(Tier1 t)
+    public void setRating()
     {
-        Vector<Employee> v=t.getUnders(t);
+        Vector<Employee> v=this.getUnders();
         if (v.get(0)==null)
         {
-            t.rating.put(-1,-1);
+            this.rating.put(-1,-1);
         }
         else
         {
@@ -162,16 +162,16 @@ class Tier1 extends Employee                    // HODs,Executives
             {
                 Employee x=v.get(i);
                 int r = (int)(Math.random() * (10 - 1 + 1) + 1);
-                int y=t.getId(x);
-                t.rating.put(y,r);
+                int y=x.getId();
+                this.rating.put(y,r);
             }
         }
     }
-    public int getRating(Tier1 t,int id)
+    public int getRating(int id)
     {
-        return(t.rating.get(id));
+        return(this.rating.get(id));
     }
-
+    
 }
 class Tier2 extends Employee                   // Managers,Supervisors
 {
@@ -180,14 +180,14 @@ class Tier2 extends Employee                   // Managers,Supervisors
     Tier2(int id,String name,int age, String department,int salary,String post,int profit)
     {
       super(id,name,age,department,salary,post,profit);
-      setAvailable(this);
+      setAvailable();
      }
-    public void setRating(Tier2 t)
+    public void setRating()
     {
-        Vector<Employee> v=t.getUnders(t);
+        Vector<Employee> v=this.getUnders();
         if (v.get(0)==null)
         {
-            t.rating.put(-1,-1);
+            this.rating.put(-1,-1);
         }
         else
         {
@@ -195,23 +195,23 @@ class Tier2 extends Employee                   // Managers,Supervisors
             {
                 Employee x=v.get(i);
                 int r = (int)(Math.random() * (10 - 1 + 1) + 1);
-                int y=t.getId(x);
-                t.rating.put(y,r);
+                int y=x.getId();
+                this.rating.put(y,r);
             }
         }
     }
-    public int getRating(Tier2 t,int id)
+    public int getRating(int id)
     {
-        return(t.rating.get(id));
+        return(this.rating.get(id));
     }
-    public void setAvailable(Tier2 t)
+    public void setAvailable()
     {
         int r = (int)(Math.random() * (10 - 1 + 1) + 1);
-         t.available=r;
+         this.available=r;
     }
-    public int getAvailable(Tier2 t)
+    public int getAvailable()
     {
-        return(t.available);
+        return(this.available);
     }
 }
 class Tier3 extends Employee                   // Inters,Security
@@ -221,33 +221,33 @@ class Tier3 extends Employee                   // Inters,Security
     Tier3(int id,String name,int age, String department,int salary,String post,int profit)
     {
        super(id,name,age,department,salary,post,profit);
-        setAvailable(this);
-        setStatus(this);
+        setAvailable();
+        setStatus();
     }
-    public void setAvailable(Tier3 t)
+    public void setAvailable()
     {
        int r = (int)(Math.random() * (10 - 1 + 1) + 1);
-       t.available=r;
+       this.available=r;
     }
-    public int getAvailable(Tier3 t)
+    public int getAvailable()
     {
-        return(t.available);
+        return(this.available);
     }
-    public void setStatus(Tier3 t)
+    public void setStatus()
     { 
-        if(t.available>5)
+        if(this.available>5)
         {
-            t.status="Permanent";
+            this.status="Permanent";
         }
         else
         {
-            t.status="Probation";
+            this.status="Probation";
         }
-
+        
     }
-    public String getStatus(Tier3 t)
+    public String getStatus()
     {
-        return(t.status);
+        return(this.status);
     }
 }
 public class MyClass
@@ -277,28 +277,28 @@ public class MyClass
         Tier3 e21= new Tier3(21,"Priya",22,"Finance",37000,"Tier3",0);
         Tier3 e22= new Tier3(22,"Ashu",24,"Design",32000,"Tier3",0);
         // setting unders
-      e1.setUnders(e1,e13,e11);
-      e2.setUnders(e2);
-      e3.setUnders(e3,e10);
-      e4.setUnders(e4,e9,e12);
-      e5.setUnders(e5);
-      e6.setUnders(e6,e15);
-      e7.setUnders(e7);
-      e8.setUnders(e8,e14);
-      e9.setUnders(e9,e16,e20);
-      e10.setUnders(e10,e18);
-      e11.setUnders(e11);
-      e12.setUnders(e12);
-      e13.setUnders(e13,e17);
-      e14.setUnders(e14,e19,e22);
-      e15.setUnders(e15,e21);
-      e16.setUnders(e16);
-      e17.setUnders(e17);
-      e18.setUnders(e18);
-      e19.setUnders(e19);
-      e20.setUnders(e20);
-      e21.setUnders(e21);
-      e22.setUnders(e22);
+      e1.setUnders(e13,e11);
+      e2.setUnders();
+      e3.setUnders(e10);
+      e4.setUnders(e9,e12);
+      e5.setUnders();
+      e6.setUnders(e15);
+      e7.setUnders();
+      e8.setUnders(e14);
+      e9.setUnders(e16,e20);
+      e10.setUnders(e18);
+      e11.setUnders();
+      e12.setUnders();
+      e13.setUnders(e17);
+      e14.setUnders(e19,e22);
+      e15.setUnders(e21);
+      e16.setUnders();
+      e17.setUnders();
+      e18.setUnders();
+      e19.setUnders();
+      e20.setUnders();
+      e21.setUnders();
+      e22.setUnders();
       // hashmaps to map Employee id with their objects
       HashMap <Integer,Tier1> T1=new HashMap<>();
       HashMap <Integer,Tier2> T2=new HashMap<>();
@@ -347,33 +347,33 @@ public class MyClass
                System.out.println("0.Exit");
                System.out.println("Press no as per choice");
                choice=scan.nextInt();
-               Tier1 E=T1.get(eid);
+               Tier1 employee=T1.get(eid);
                switch(choice)
                 {
                    case 1:
                       {
-                          E.printDetails(E); 
+                         employee.printDetails(); 
                           break;
                       }
                    case 2:
                       {
-                           E.printAnnualsalary(E);
+                          employee.printAnnualsalary();
                            break;
                       }
                    case 3:
                       {
-                          E.printUpper(E);
+                          employee.printUpper();
                           break;
                       }
                    case 4:
                       {
-                         E.printUnders(E);
+                         employee.printUnders();
                          break;
                       }
                   case 5:
                       {
-                         System.out.println(E.getName(E));
-                          E.getHierarchy();
+                         System.out.println(employee.getName());
+                          employee.getHierarchy();
                           break;
                       }
                   case 0:
@@ -384,7 +384,7 @@ public class MyClass
                    {
                        System.out.println("Invalid Choice");
                    }
-
+                  
                 } 
             } // end of if
          else if(eid<16)
@@ -397,33 +397,33 @@ public class MyClass
                  System.out.println("0.Exit");
                  System.out.println("Press no as per choice");
                  choice=scan.nextInt();
-                 Tier2 E=T2.get(eid);
+                 Tier2 employee=T2.get(eid);
                  switch(choice)
                    {
                       case 1:
                         {
-                             E.printDetails(E); 
+                             employee.printDetails(); 
                               break;
                         }
                       case 2:
                         {
-                             E.printAnnualsalary(E);
+                             employee.printAnnualsalary();
                               break;
                         }
                       case 3:
                          {
-                              E.printUpper(E);
+                              employee.printUpper();
                               break;
                          }
                       case 4:
                          {
-                              E.printUnders(E);
+                              employee.printUnders();
                               break;
                          }
                       case 5:
                          {
-                              System.out.println(E.getName(E));
-                              E.getHierarchy();
+                              System.out.println(employee.getName());
+                              employee.getHierarchy();
                               break;
                          }
                       case 0:
@@ -434,7 +434,7 @@ public class MyClass
                          {
                              System.out.println("Invalid Choice");
                           }
-
+            
                     } 
             }// end of else if
         else if(eid<23)
@@ -447,33 +447,33 @@ public class MyClass
                    System.out.println("0.Exit");
                    System.out.println("Press no as per choice");
                    choice=scan.nextInt();
-                   Tier3 E=T3.get(eid);
+                   Tier3 employee=T3.get(eid);
                    switch(choice)
                        {
                           case 1:
                             {
-                              E.printDetails(E); 
+                              employee.printDetails(); 
                               break;
                             }
                          case 2:
                              {
-                                 E.printAnnualsalary(E);
+                                 employee.printAnnualsalary();
                                  break;
                              }
                          case 3:
                              {
-                                  E.printUpper(E);
+                                  employee.printUpper();
                                   break;
                              }
                          case 4:
                              {
-                                   E.printUnders(E);
+                                   employee.printUnders();
                                    break;
                              }
                           case 5:
                               {
-                                  System.out.println(E.getName(E));
-                                  E.getHierarchy();
+                                  System.out.println(employee.getName());
+                                  employee.getHierarchy();
                                   break;
                               }
                          case 0:
@@ -484,10 +484,10 @@ public class MyClass
                               {
                                   System.out.println("Invalid Choice");
                               }
-
+            
                         } 
             }   //end of else
      }//end of while
-
+     
     }// end of main
-}// end of Myclass 
+}// end of Myclass
