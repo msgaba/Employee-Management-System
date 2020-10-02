@@ -13,6 +13,10 @@ class Employee
     private Vector<Employee> unders = new Vector<Employee>();
     private Employee upper=null;
     // Parent class constructor
+    Employee()
+    {
+        
+    }
     Employee(int id,String name,int age, String department,int salary,String post,int profit)
     {
         this.id=id;
@@ -59,17 +63,13 @@ class Employee
     {
         this.unders.add(null);
     }
-    public void setUnders(Employee e2)
+    public void setUnders(Employee ... e)   //  Employee ... e= varargs(Variable Length Arguments[when no of arguments are unknown])
     {
-        this.unders.add(e2);
-         this.setUpper(e2);
-    }
-    public void setUnders(Employee e2,Employee e3)
-    {
-        this.unders.add(e2);
-       this.setUpper(e2);
-        this.unders.add(e3);
-        this.setUpper(e3);
+        for(int i=0;i<e.length;i++)
+        {
+            this.unders.add(e[i]);
+            this.setUpper(e[i]);
+        }
     }
     public void printUnders()
     {
@@ -299,32 +299,30 @@ public class MyClass
       e20.setUnders();
       e21.setUnders();
       e22.setUnders();
-      // hashmaps to map Employee id with their objects
-      HashMap <Integer,Tier1> T1=new HashMap<>();
-      HashMap <Integer,Tier2> T2=new HashMap<>();
-      HashMap <Integer,Tier3> T3=new HashMap<>();
-      T1.put(1,e1);
-      T1.put(2,e2);
-      T1.put(3,e3);
-      T1.put(4,e4);
-      T1.put(5,e5);
-      T1.put(6,e6);
-      T1.put(7,e7);
-      T1.put(8,e8);
-      T2.put(9,e9);
-      T2.put(10,e10);
-      T2.put(11,e11);
-      T2.put(12,e12);
-      T2.put(13,e13);
-      T2.put(14,e14);
-      T2.put(15,e15);
-      T3.put(16,e16);
-      T3.put(17,e17);
-      T3.put(18,e18);
-      T3.put(19,e19);
-      T3.put(20,e20);
-      T3.put(21,e21);
-      T3.put(22,e22);
+      // hashmap to map Employee id with their objects
+     HashMap <Integer,Employee> T=new HashMap<>();
+      T.put(1,e1);
+      T.put(2,e2);
+      T.put(3,e3);
+      T.put(4,e4);
+      T.put(5,e5);
+      T.put(6,e6);
+      T.put(7,e7);
+      T.put(8,e8);
+      T.put(9,e9);
+      T.put(10,e10);
+      T.put(11,e11);
+      T.put(12,e12);
+      T.put(13,e13);
+      T.put(14,e14);
+      T.put(15,e15);
+      T.put(16,e16);
+      T.put(17,e17);
+      T.put(18,e18);
+      T.put(19,e19);
+      T.put(20,e20);
+      T.put(21,e21);
+      T.put(22,e22);
       int choice=1;
      while(choice!=0)
      {
@@ -337,18 +335,30 @@ public class MyClass
                System.out.println("Invalid Input");
               // System.exit(0);
             }
-         if(eid<9)
+            Employee e=T.get(eid);
+            Employee employee=new Employee();
+            if(e instanceof Tier1)
             {
-               System.out.println("1.Basic Details");
-               System.out.println("2.Annual Salary");
-               System.out.println("3.Superior");
-               System.out.println("4.Juniors");
-               System.out.println("5.Hierarchy");
-               System.out.println("0.Exit");
-               System.out.println("Press no as per choice");
-               choice=scan.nextInt();
-               Tier1 employee=T1.get(eid);
-               switch(choice)
+                
+                 employee=(Tier1)e;
+            }
+           else if(e instanceof Tier2)
+            {
+                 employee=(Tier2)e;
+            }
+            else if(e instanceof Tier3)
+            {
+               employee=(Tier3)e;
+            }
+            System.out.println("1.Basic Details");
+            System.out.println("2.Annual Salary");
+            System.out.println("3.Superior");
+            System.out.println("4.Juniors");
+            System.out.println("5.Hierarchy");
+            System.out.println("0.Exit");
+            System.out.println("Press no as per choice");
+            choice=scan.nextInt();
+            switch(choice)
                 {
                    case 1:
                       {
@@ -386,107 +396,7 @@ public class MyClass
                    }
                   
                 } 
-            } // end of if
-         else if(eid<16)
-            {
-                 System.out.println("1.Basic Details");
-                 System.out.println("2.Annual Salary");
-                 System.out.println("3.Superior");
-                 System.out.println("4.Juniors");
-                 System.out.println("5.Hierarchy");
-                 System.out.println("0.Exit");
-                 System.out.println("Press no as per choice");
-                 choice=scan.nextInt();
-                 Tier2 employee=T2.get(eid);
-                 switch(choice)
-                   {
-                      case 1:
-                        {
-                             employee.printDetails(); 
-                              break;
-                        }
-                      case 2:
-                        {
-                             employee.printAnnualsalary();
-                              break;
-                        }
-                      case 3:
-                         {
-                              employee.printUpper();
-                              break;
-                         }
-                      case 4:
-                         {
-                              employee.printUnders();
-                              break;
-                         }
-                      case 5:
-                         {
-                              System.out.println(employee.getName());
-                              employee.getHierarchy();
-                              break;
-                         }
-                      case 0:
-                         {
-                               System.exit(0);
-                         }
-                         default:
-                         {
-                             System.out.println("Invalid Choice");
-                          }
-            
-                    } 
-            }// end of else if
-        else if(eid<23)
-            {
-                   System.out.println("1.Basic Details");
-                   System.out.println("2.Annual Salary");
-                   System.out.println("3.Superior");
-                   System.out.println("4.Juniors");
-                   System.out.println("5.Hierarchy");
-                   System.out.println("0.Exit");
-                   System.out.println("Press no as per choice");
-                   choice=scan.nextInt();
-                   Tier3 employee=T3.get(eid);
-                   switch(choice)
-                       {
-                          case 1:
-                            {
-                              employee.printDetails(); 
-                              break;
-                            }
-                         case 2:
-                             {
-                                 employee.printAnnualsalary();
-                                 break;
-                             }
-                         case 3:
-                             {
-                                  employee.printUpper();
-                                  break;
-                             }
-                         case 4:
-                             {
-                                   employee.printUnders();
-                                   break;
-                             }
-                          case 5:
-                              {
-                                  System.out.println(employee.getName());
-                                  employee.getHierarchy();
-                                  break;
-                              }
-                         case 0:
-                              {
-                                      System.exit(0);
-                              }
-                          default:
-                              {
-                                  System.out.println("Invalid Choice");
-                              }
-            
-                        } 
-            }   //end of else
+        
      }//end of while
      
     }// end of main
