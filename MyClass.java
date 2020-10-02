@@ -22,7 +22,7 @@ class Employee
         this.salary=salary;
         this.post=post;
         this.profit=profit;
-        
+
     }
     //methods of parent class
     public void printDetails(Employee e)
@@ -33,7 +33,7 @@ class Employee
         System.out.println("Department-"+e.department);
         System.out.println("Salary-"+e.salary);
         System.out.println("Post-"+e.post);
-        
+
     }
     public int getId(Employee e)
     {
@@ -106,13 +106,41 @@ class Employee
         {
             System.out.println("Superior-"+x.name);
         }
-        
+
     }
     public Employee getUpper(Employee e)
     {
         return(e.upper);
     }
-    
+    public void printHierarchy()
+    {
+        if(this.unders.get(0)==null)
+       {
+           return;
+       }
+        int x=this.unders.size();
+        for(int i=0;i<x;i++)
+        {
+             Employee e=this.unders.get(i);
+            System.out.print(e.getName(e)+" ");
+        }
+        System.out.println("");
+    }
+    public void getHierarchy()
+    {
+       if(this.unders.get(0)==null)
+       {
+         return;
+       }
+       this.printHierarchy();
+        int x=this.unders.size();
+        for(int i=0;i<x;i++)
+        {
+            Employee e=this.unders.get(i);
+            e.getHierarchy();
+        }
+    }
+
 }
 class Tier1 extends Employee                    // HODs,Executives
 {    
@@ -143,7 +171,7 @@ class Tier1 extends Employee                    // HODs,Executives
     {
         return(t.rating.get(id));
     }
-    
+
 }
 class Tier2 extends Employee                   // Managers,Supervisors
 {
@@ -215,7 +243,7 @@ class Tier3 extends Employee                   // Inters,Security
         {
             t.status="Probation";
         }
-        
+
     }
     public String getStatus(Tier3 t)
     {
@@ -344,8 +372,8 @@ public class MyClass
                       }
                   case 5:
                       {
-                          String x=E.getName(E);
-                          System.out.println("hierarchy-"+x);
+                         System.out.println(E.getName(E));
+                          E.getHierarchy();
                           break;
                       }
                   case 0:
@@ -356,7 +384,7 @@ public class MyClass
                    {
                        System.out.println("Invalid Choice");
                    }
-                  
+
                 } 
             } // end of if
          else if(eid<16)
@@ -394,12 +422,9 @@ public class MyClass
                          }
                       case 5:
                          {
-                              String x=E.getName(E);
-                              System.out.print("hierarchy-"+x);
-                              Employee t1=E.getUpper(E);
-                              String y=t1.getName(t1);
-                              System.out.println("----->"+y);  
-                               break;
+                              System.out.println(E.getName(E));
+                              E.getHierarchy();
+                              break;
                          }
                       case 0:
                          {
@@ -409,7 +434,7 @@ public class MyClass
                          {
                              System.out.println("Invalid Choice");
                           }
-            
+
                     } 
             }// end of else if
         else if(eid<23)
@@ -447,14 +472,8 @@ public class MyClass
                              }
                           case 5:
                               {
-                                  String x=E.getName(E);
-                                  System.out.print("hierarchy-"+x);
-                                  Employee t2=E.getUpper(E);
-                                  String y=t2.getName(t2);
-                                  System.out.print("----->"+y);
-                                  Employee t1=t2.getUpper(t2);
-                                  String z=t1.getName(t1);
-                                  System.out.println("----->"+z);
+                                  System.out.println(E.getName(E));
+                                  E.getHierarchy();
                                   break;
                               }
                          case 0:
@@ -465,10 +484,10 @@ public class MyClass
                               {
                                   System.out.println("Invalid Choice");
                               }
-            
+
                         } 
-            }   //end of else if
+            }   //end of else
      }//end of while
-     
+
     }// end of main
-}// end of Myclass
+}// end of Myclass 
