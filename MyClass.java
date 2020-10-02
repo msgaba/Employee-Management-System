@@ -59,12 +59,17 @@ class Employee
         int x=calSalary();
         System.out.println("Annual Salary-"+x);
     }
-    public void setUnders()
+  /*  public void setUnders()
     {
         this.unders.add(null);
-    }
+    }*/
     public void setUnders(Employee ... e)   //  Employee ... e= varargs(Variable Length Arguments[when no of arguments are unknown])
     {
+        if(e.length==0)
+        {
+            this.unders.add(null);
+            return;
+        }
         for(int i=0;i<e.length;i++)
         {
             this.unders.add(e[i]);
@@ -329,12 +334,21 @@ public class MyClass
          System.out.println("\t\tWelcome User");
          System.out.println("Enter Employee Id for details");
          Scanner scan=new Scanner(System.in);
-         int eid=scan.nextInt();
+         int eid;
+        try
+        {
+         eid=scan.nextInt();
          if((eid<1)||(eid>22))
             {
                System.out.println("Invalid Input");
-              // System.exit(0);
+               continue;
             }
+        }
+        catch(Throwable exc)
+        {
+            System.out.println("Invalid Input");
+            continue;
+        }
             Employee e=T.get(eid);
             Employee employee=new Employee();
             if(e instanceof Tier1)
