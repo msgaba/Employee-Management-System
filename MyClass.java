@@ -22,7 +22,7 @@ class Employee
         this.salary=salary;
         this.post=post;
         this.profit=profit;
-
+        
     }
     //methods of parent class
     public void printDetails(Employee e)
@@ -33,7 +33,7 @@ class Employee
         System.out.println("Department-"+e.department);
         System.out.println("Salary-"+e.salary);
         System.out.println("Post-"+e.post);
-
+        
     }
     public int getId(Employee e)
     {
@@ -106,13 +106,13 @@ class Employee
         {
             System.out.println("Superior-"+x.name);
         }
-
+        
     }
     public Employee getUpper(Employee e)
     {
         return(e.upper);
     }
-
+    
 }
 class Tier1 extends Employee                    // HODs,Executives
 {    
@@ -143,7 +143,7 @@ class Tier1 extends Employee                    // HODs,Executives
     {
         return(t.rating.get(id));
     }
-
+    
 }
 class Tier2 extends Employee                   // Managers,Supervisors
 {
@@ -215,7 +215,7 @@ class Tier3 extends Employee                   // Inters,Security
         {
             t.status="Probation";
         }
-
+        
     }
     public String getStatus(Tier3 t)
     {
@@ -356,7 +356,7 @@ public class MyClass
                    {
                        System.out.println("Invalid Choice");
                    }
-
+                  
                 } 
             } // end of if
          else if(eid<16)
@@ -409,7 +409,7 @@ public class MyClass
                          {
                              System.out.println("Invalid Choice");
                           }
-
+            
                     } 
             }// end of else if
         else if(eid<23)
@@ -465,10 +465,10 @@ public class MyClass
                               {
                                   System.out.println("Invalid Choice");
                               }
-
+            
                         } 
             }   //end of else if
      }//end of while
-
+     
     }// end of main
 }// end of Myclass
